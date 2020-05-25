@@ -1,0 +1,562 @@
+swagger: "2.0"
+info:
+  title: yonder-api
+  description: Official Yonder REST API
+  version: 0.0.1
+host: localhost:4000
+basePath: /api
+tags:
+  - name: properties
+    description: Properties
+  - name: organizations
+    description: Organizations
+  - name: users
+    description: Users
+  - name: payment
+    description: Payment
+  - name: bookings
+    description: Bookings
+  - name: settings
+    description: Settings
+  - name: guestbook
+    description: GuestbookEntry
+schemes:
+  - http
+  - https
+paths:
+  "/properties":
+    post:
+      tags:
+        - properties
+      summary: Creates a property
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        201:
+          description: Created
+        409:
+          description: Non-unique email
+        500:
+          description: NULL data, all other errors (at the moment)
+    get:
+      tags:
+        - properties
+      summary: Fetches properties (max of 25)
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        500:
+          description: All other errors
+  "/properties/{id}":
+    get:
+      tags:
+        - properties
+      summary: Gets a property by id
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        404:
+          description: id was not found
+        500:
+          description: All other errors
+    put:
+      tags:
+        - properties
+      summary: Updates a property based on id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Updated
+        409:
+          description: Non-unique email
+        500:
+          description: All other errors
+    delete:
+      tags:
+        - properties
+      summary: Deletes a property based on id
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Deleted
+        500:
+          description: All other errors
+
+  "/organizations":
+    post:
+      tags:
+        - organizations
+      summary: Creates an organization
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        201:
+          description: Created
+        500:
+          description: NULL data, all other errors (at the moment)
+    get:
+      tags:
+        - organizations
+      summary: Fetches organizations (max of 25)
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        500:
+          description: All other errors
+  "/organizations/{id}":
+    get:
+      tags:
+        - organizations
+      summary: Gets a organization based on its id
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        404:
+          description: id was not found
+        500:
+          description: All other errors
+    put:
+      tags:
+        - organizations
+      summary: Updates an organization based on its id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Updated
+        500:
+          description: All other errors
+    delete:
+      tags:
+        - organizations
+      summary: Deletes a organizations based on its id
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Deleted
+        500:
+          description: All other errors
+
+  "/users":
+    post:
+      tags:
+        - users
+      summary: Creates a user
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        201:
+          description: Created
+        409:
+          description: Non-unique email
+        500:
+          description: NULL data, all other errors (at the moment)
+    get:
+      tags:
+        - users
+      summary: Fetches users (max of 25)
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        500:
+          description: All other errors
+  "/users/{id}":
+    get:
+      tags:
+        - users
+      summary: Gets a user based on their id
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        404:
+          description: id was not found
+        500:
+          description: All other errors
+    put:
+      tags:
+        - users
+      summary: Updates a user based on their id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Updated
+        409:
+          description: Non-unique email
+        500:
+          description: All other errors
+    delete:
+      tags:
+        - users
+      summary: Deletes a user based on their id
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Deleted
+        500:
+          description: All other errors
+
+  "/pay/methods":
+    get:
+      tags:
+        - payment
+      summary: Gets all payment methods for the authenticated user
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        500:
+          description: All other errors
+    post:
+      tags:
+        - payment
+      summary: Creates a payment method
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        201:
+          description: Created
+        409:
+          description: Non-unique email
+        500:
+          description: NULL data, all other errors (at the moment)
+    delete:
+      tags:
+        - payment
+      summary: Deletes a payment method by id from the authenticated user
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Deleted
+        500:
+          description: All other errors
+
+    "/pay/methods":
+    get:
+      tags:
+        - payment
+      summary: Gets all payment methods for the authenticated user
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+        500:
+          description: All other errors
+    post:
+      tags:
+        - payment
+      summary: Creates a payment method
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        201:
+          description: Created
+        409:
+          description: Non-unique email
+        500:
+          description: NULL data, all other errors (at the moment)
+    delete:
+      tags:
+        - payment
+      summary: Deletes a payment method by id from the authenticated user
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Deleted
+        500:
+          description: All other errors
+  "/bookings":
+    post:
+      tags:
+        - bookings
+      summary: Creates a booking
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        201:
+          description: Created
+        409:
+          description: Booking exist on a given date range
+        500:
+          description: All other errors
+
+    get:
+      tags:
+        - bookings
+      summary: Gets all booking with given userId
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Ok Response
+        404:
+          description: userId not found
+        500:
+          description: All other errors
+
+
+  "/bookings/valid-date-range":
+    get:
+      tags:
+        - bookings
+      summary: Returns if booking is possible for the given date range
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Query
+        500:
+          description: All other errors
+
+  "/bookings/get-avaiable-dates/{id}":
+    get:
+      tags:
+        - bookings
+      summary: Returns the booking dates for a perticular property-id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Successful Query
+        500:
+          description: All other errors
+
+  "/bookings/{bookingId}/fees":
+    post:
+      tags:
+        - bookings
+      summary: Returns the fee Array from particular booking
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: Query Successful - gets the fee array
+        404:
+          description: Fee not found for booking
+        500:
+          description: All other errors
+  "/settings":
+    get:
+      tags:
+        - settings
+      summary: get Settings for a given user-id or creates a new one
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK response
+        422:
+          description: New Settings creation Error
+        500:
+          description: All other errors
+  "/settings/fcm-token":
+    post:
+      tags:
+        - settings
+      summary: Update Settings[Fcm token] for a given user-id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK response
+        422:
+          description: Invalid parameters
+        500:
+          description: All other errors
+
+  "/settings/notify":
+    post:
+      tags:
+        - settings
+      summary: Update Settings[push-notification] for a given user-id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK response
+        422:
+          description: Invalid parameters
+        500:
+          description: All other errors
+
+  "/settings/default-currency":
+    post:
+      tags:
+        - settings
+      summary: Update Settings[default-currency] for a given user-id
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK response
+        422:
+          description: Invalid parameters
+        500:
+          description: All other errors
+  "/":
+      post:
+        tags:
+          - guestbook
+        summary: Sets new guestbook-entry 
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          200:
+            description: OK response
+          422:
+            description: Invalid parameters
+          500:
+            description: All other errors
+  "/":
+      get:
+        tags:
+          - guestbook
+        summary: gets all GuestbookEntry entries for given userId
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          200:
+            description: OK response
+          404:
+            description: Not Found
+          500:
+            description: All other errors     
+
+  "/{guestbookEntryId}":
+      get:
+        tags:
+          - guestbook
+        summary: return a single guestbook by guestbookEntryId
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          200:
+            description: OK response
+          404:
+            description: Not Found
+          500:
+            description: All other errors   
+      put:
+        tags:
+          - guestbook
+        summary: updates guestbookEntryId entry 
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          200:
+            description: OK response
+          422:
+            description: Invalid parameters
+          500:
+            description: All other errors     
+      delete:
+        tags:
+          - guestbook
+        summary: Deletes guestbookEntryId entry  
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          200:
+            description: OK response
+          422:
+            description: Invalid parameters
+          500:
+            description: All other errors       
+
+  "/listings/{listingId}":
+      get:
+        tags:
+          - guestbook
+        summary: return all guestbook entries by listingId
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          200:
+            description: OK response
+          404:
+            description: Not Found
+          500:
+            description: All other errors 
+
+  "/listings/{listingId}/user/{userId}":
+      get:
+        tags:
+          - guestbook
+        summary: return all guestbook entries by listingId
+        consumes:
+          - application/json
+        produces:
+          - application/json
+        responses:
+          200:
+            description: OK response
+          404:
+            description: Not Found
+          500:
+            description: All other errors              

@@ -1,0 +1,9 @@
+const path = require('path')
+
+module.exports = {
+  "config": path.resolve('./dist/utility/db/config', 'sequlize.config.js'),
+  "models-path": path.resolve('./dist/utility/db/models'),
+  "seeders-path": path.resolve('./dist/utility/db/seeders'),
+  "migrations-source-path": path.resolve('./src/utility/migrations'),
+  "migrations-compiled-path": path.resolve('./dist/utility/migrations')
+}

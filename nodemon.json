@@ -1,0 +1,18 @@
+{
+    "ignore": [
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        ".git",
+        "node_modules"
+    ],
+    "watch": [
+        "src",
+        "types",
+        "public",
+        ".env",
+        "tsconfig.json",
+        "swagger.yml"
+    ],
+    "exec": "yarn build:ts",
+    "ext": "ts"
+}
