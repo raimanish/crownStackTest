@@ -13,7 +13,10 @@ class ProductValidator {
         .messages({
             "string.max": `"description" can have a maximum length of 200`,
         }),
-        price: this.numberSchema.required().greater(0),  //.pattern(new RegExp('^\d+\.\d{0,2}$')),
+        price: this.stringSchema.required().pattern(new RegExp('^(0*[1-9][0-9]*(\.[0-9]+)?|0+\.[0-9]*[1-9][0-9]*)$'))
+        .messages({
+            "string.pattern.base":`"price" must be greater than zero and can have max two decimal places"`, 
+        }),
         make: this.numberSchema.required().integer().min(1900).max(new Date().getFullYear())
         .messages({
             "number.min": `"name" Year must be greater than 1900`,

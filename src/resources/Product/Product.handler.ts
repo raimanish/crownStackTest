@@ -4,7 +4,7 @@ import { Product } from "../../utility/db/models/product.model";
 
 export class ProductHandler extends BaseModel {
 
-    static async create(body) {
+    static async create(body: any) {
         try {
             const validate = ProductValidator.create.validate(body, { abortEarly: false } );
 
@@ -28,6 +28,7 @@ export class ProductHandler extends BaseModel {
             const products: any = await Product.findAll({ 
                 limit: Number(perPage),
                 offset: pageSkip,
+                attributes: ['productId', 'name', 'price', 'make']
             });
             const total = await Product.count({}); 
             return { total, products}

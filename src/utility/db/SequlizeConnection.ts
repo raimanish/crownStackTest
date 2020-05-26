@@ -40,10 +40,10 @@ export default class SequlizeConnection {
     });
 
     //{force:true} (Do not commit this, use locally only)
-    this.sequelize.sync({ }).then(async res => {
+    SequlizeConnection.sequelize.sync({  }).then(async res => {
       console.log("Sequelize is now Ready");
-      BootstrapDb.insertRole();
-      BootstrapDb.CreateAdmin();
+      await BootstrapDb.insertRole();
+      await BootstrapDb.CreateAdmin();
     });
   }
 }

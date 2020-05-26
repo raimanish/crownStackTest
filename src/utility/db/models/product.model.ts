@@ -17,8 +17,8 @@ export class Product extends Model<Product> {
   @Column(DataType.INTEGER)
   make: number;
 
-  @Column(DataType.DECIMAL(10, 2))  
-  price: number;
+  @Column(DataType.STRING)  
+  price: string;
 
   @Default(true)
   @Column(DataType.BOOLEAN)

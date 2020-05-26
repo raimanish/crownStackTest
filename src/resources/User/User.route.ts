@@ -1,5 +1,5 @@
 import { expandRoutes, IRoute, ROUTE, GET, POST, DELETE } from "../../utility/routes";
-import { handleError } from "../../utility/db";
+// import { handleError } from "../../utility/db";
 import { UserHandler } from "./User.handler";
 
 

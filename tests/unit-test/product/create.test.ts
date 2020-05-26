@@ -55,7 +55,7 @@ describe("Create Product",  () => {
     })
 
 
-    it("should give error for required field", async() => {
+    it("should added product successfully", async() => {
         let body = { name:'test', description: 'test', prrice: 10.02,  make: 1990  }
         let validateResult = {
             value: { name:'test', description: 'test', prrice: 10.02,  make: 1990 },
@@ -70,6 +70,20 @@ describe("Create Product",  () => {
     expect(result).toMatchObject(actual);
     expect(mockValidation.mock.calls.length).toBe(1);
     expect(mockCreate.mock.calls.length).toBe(1)
+    })
+    
+    it("should throw error if product creation failed", async() => {
+        let body = { name:'test', description: 'test', prrice: 10.02,  make: 1990  }
+        let validateResult = {
+            value: { name:'test', description: 'test', prrice: 10.02,  make: 1990 },
+        }
+
+        mockValidation.mockReturnValue(validateResult)
+        mockCreate.mockRejectedValueOnce('Product creation failed')
+        const response = await ProductHandler.create(body);
+        expect(mockValidation.mock.calls.length).toBe(1);
+        expect(mockCreate.mock.calls.length).toBe(1)
+        expect(response).toEqual('Product creation failed')
     })
 
 })

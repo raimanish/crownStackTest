@@ -1,5 +1,5 @@
 import { expandRoutes, IRoute, ROUTE, POST } from "../../utility/routes";
-import { handleError } from "../../utility/db";
+// import { handleError } from "../../utility/db";
 import { ProductHandler } from "./Product.handler";
 import EndpointPermissions from "../../utility/endpoint-permissions";
 
@@ -21,7 +21,7 @@ const routesUsersPublic: IRoute[] = [
                     res.status(200).send(results);
 
             } catch (err) {
-                next(handleError(err));
+                next((err));
             }
         }
     },

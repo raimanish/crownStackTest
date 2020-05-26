@@ -30,45 +30,45 @@ export class LineItem extends Model<LineItem> {
   @BelongsTo(() => Order)
   order: Order
 
-  @BeforeCreate
-  static async addAmount(instance: LineItem) {
-    const product:any = await Product.findOne({ where: { productId: instance.productId }})
-    if(!product){
-      throw new Error('Product does not exist')
-    }
-    instance.amount = Number(instance.quantity) * parseFloat(product.price)
-  }
+  // @BeforeCreate
+  // static async addAmount(instance: LineItem) {
+  //   const product:any = await Product.findOne({ where: { productId: instance.productId }})
+  //   if(!product){
+  //     throw new Error('Product does not exist')
+  //   }
+  //   instance.amount = Number(instance.quantity) * parseFloat(product.price)
+  // }
 
-  @AfterCreate
-  static async updateTotal(instance: LineItem) {
-    const order:any = await Order.findOne({ where: { orderId: instance.orderId }});
-    if(!order){
-      throw new Error('Order does not exist')
-    }
-    await Order.update(
-      { 
-        total: parseFloat(order.total) + Number(instance.amount)
-      }, 
-      { 
-        where: {
-          orderId: order.orderId
-      }
-    })
-  }
+  // @AfterCreate
+  // static async updateTotal(instance: LineItem) {
+  //   const order:any = await Order.findOne({ where: { orderId: instance.orderId }});
+  //   if(!order){
+  //     throw new Error('Order does not exist')
+  //   }
+  //   await Order.update(
+  //     { 
+  //       total: parseFloat(order.total) + Number(instance.amount)
+  //     }, 
+  //     { 
+  //       where: {
+  //         orderId: order.orderId
+  //     }
+  //   })
+  // }
 
-  static async updateLineItemTotal(instance: LineItem) {
-    const order:any = await Order.findOne({ where: { orderId: instance.orderId }});
-    if(!order){
-      throw new Error('Order does not exist')
-    }
-    await Order.update(
-      { 
-        total: parseFloat(order.total) + Number(instance.amount)
-      }, 
-      { 
-        where: {
-          orderId: order.orderId
-      }
-    })
-  }
+  // static async updateLineItemTotal(instance: LineItem) {
+  //   const order:any = await Order.findOne({ where: { orderId: instance.orderId }});
+  //   if(!order){
+  //     throw new Error('Order does not exist')
+  //   }
+  //   await Order.update(
+  //     { 
+  //       total: parseFloat(order.total) + Number(instance.amount)
+  //     }, 
+  //     { 
+  //       where: {
+  //         orderId: order.orderId
+  //     }
+  //   })
+  // }
 }

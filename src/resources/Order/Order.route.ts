@@ -1,5 +1,5 @@
 import { expandRoutes, IRoute, ROUTE, GET, POST, DELETE } from "../../utility/routes";
-import { handleError } from "../../utility/db";
+// import { handleError } from "../../utility/db";
 import { OrderHandler } from "./Order.handler";
 
 
@@ -37,7 +37,7 @@ const routesUsersPrivate: IRoute[] = [
                     res.status(200).send(results);
 
             } catch (err) {
-                next(handleError(err));
+                next((err));
             }
         }
     }

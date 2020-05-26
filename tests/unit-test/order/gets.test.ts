@@ -20,7 +20,7 @@ describe("Gets Order",  () => {
 
 
 
-    it("should give success message", async() => {
+    it("should return items", async() => {
 
         let order = { 
             orderId: 2, total: 10, status: 1,
@@ -31,18 +31,8 @@ describe("Gets Order",  () => {
                     orderId: 2,
                     quantity: 4,
                     amount: 40.08,
-                    createdAt: "2020-05-21T12:02:29.030Z",
-                    updatedAt: "2020-05-21T12:03:03.215Z",
                     product: {
                         productId: 1,
-                        name: "Tea",
-                        description: "Best taste tea",
-                        make: 1990,
-                        price: 10.02,
-                        active: true,
-                        createdAt: 
-                        "2020-05-20T19:57:32.787Z",
-                        updatedAt: "2020-05-20T19:57:32.787Z"
                     }
                 },
                 {
@@ -51,17 +41,8 @@ describe("Gets Order",  () => {
                     orderId: 2,
                     quantity: 2,
                     amount: "10.00",
-                    createdAt: "2020-05-21T12:03:23.503Z",
-                    updatedAt: "2020-05-21T12:03:23.503Z",
                     product: {
                         productId: 2,
-                        name: "Tea Cup",
-                        description: "nice shape",
-                        make: 2020,
-                        price: 5.00,
-                        active: true,
-                        createdAt: "2020-05-20T20:03:20.728Z",
-                        updatedAt: "2020-05-20T20:03:20.728Z"
                     }
                 }
             ]

@@ -140,5 +140,14 @@ describe('User Login In', function(){
     expect(mockFindOne.mock.calls.length).toBe(1)
     expect(mockJwtHelper.mock.calls.length).toBe(1)
   })
+
+  it("should throw error user find one fails", async() => {
+       
+    var body = { name: 'Manish', email: 'manish@gmail.com', password: 'test@123' }
+    mockFindOne.mockRejectedValueOnce('User find failed')
+    const response = await UserHandler.login(body, 'User')
+    expect(mockFindOne.mock.calls.length).toBe(1)
+    expect(response).toEqual('User find failed')
+  })
   
 })

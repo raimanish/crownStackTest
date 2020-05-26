@@ -3,20 +3,19 @@ import { User } from '../../utility/db/models/user.model';
 import { JwtHelper } from "../../utility/helpers/jwt.helper";
 import { Role } from "../../utility/db/models/role.model";
 import UserValidator from './User.validator';
-import { BootstrapDb } from '../../utility/helpers/BootstrapDb.helper';
 import bcrypt from 'bcrypt';
 import SequlizeConnection from "../../utility/db/SequlizeConnection";
 
 export class UserHandler extends BaseModel {
 
-    static async signUp(body) {
+    static async signUp(body: any) {
         try {
             const validate = UserValidator.SignUp.validate(body, { abortEarly: false } );
             if (validate.error) {
                 throw new Error(validate.error.details.map((error) => error.message.replace(/\"/g, '')).join(', '));
             }
             const value = validate.value;
-            const isUserExists:any = await User.findOne({ where: { email: value.email } });
+            const isUserExists: User | null = await User.findOne({ where: { email: value.email } });
 
             if(isUserExists){
                 throw new Error('User already exist');
@@ -26,7 +25,7 @@ export class UserHandler extends BaseModel {
             const hash = await bcrypt.hashSync(value.password, 10);
 
             // await SequlizeConnection.sequelize.transaction(async (t) => {
-                
+                // uncomment it for production because jest was not mocking it
                 user = await User.create({
                     name: value.name,
                     email: value.email,
@@ -41,7 +40,7 @@ export class UserHandler extends BaseModel {
         }
     }
 
-    static async login(body, userRole) {
+    static async login(body:any, userRole: string) {
         try {
             const validate = UserValidator.Login.validate(body, { abortEarly: false } );
 
@@ -49,7 +48,7 @@ export class UserHandler extends BaseModel {
                 throw new Error(validate.error.details.map((error) => error.message.replace(/\"/g, '')).join(', '));
             }
             const value = validate.value;
-            const user = await User.findOne({ 
+            const user: User | null = await User.findOne({ 
                 where: { email: value.email },
                 include: [
                     {

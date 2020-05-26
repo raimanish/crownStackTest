@@ -3,7 +3,6 @@ import "jest";
 import { UserHandler }  from '../../../src/resources/User/User.handler';
 import UserValidator  from '../../../src/resources/User/User.validator';
 import { User } from '../../../src/utility/db/models/user.model';
-import { BootstrapDb } from '../../../src/utility/helpers/BootstrapDb.helper';
 import SequlizeConnection from '../../../src/utility/db/SequlizeConnection';
 import bcrypt from 'bcrypt';
 
@@ -74,7 +73,7 @@ describe('User Sign Up', function(){
     expect(result).toMatchObject(actual);
 })
 
-  it('Should give Error if body have name greater than 40:', async () =>{
+  it('Should give Error if validation failed:', async () =>{
     var body = { name: 'Manish',  passwod: 'test@123', email: 'test@gmail.com' }
     var validateResult = {
         value: { name: 'Manish rai', password: 'test@123', email: 'test@gmail.com'},
@@ -131,6 +130,27 @@ describe('User Sign Up', function(){
     
     const actual= { message: 'Sign up successfully' };
     expect(result).toMatchObject(actual);
+  })
+
+  it("should throw error if user find one fails", async() => {
+       
+    var body = { name: 'Manish', email: 'manish@gmail.com', password: 'test@123' }
+    mockFindOne.mockRejectedValueOnce('User find failed')
+    const response = await UserHandler.signUp(body)
+    expect(mockUserCreate.mock.calls.length).toBe(0)
+    expect(mockFindOne.mock.calls.length).toBe(1)
+    expect(response).toBe('User find failed')
+  })
+
+  it("should throw error if user creation fails", async() => {  
+    var body = { name: 'Manish', email: 'manish@gmail.com', password: 'test@123' }
+    mockFindOne.mockReturnValueOnce(null)
+
+    mockUserCreate.mockRejectedValueOnce('User creation failed')
+    const response = await UserHandler.signUp(body)
+    expect(mockUserCreate.mock.calls.length).toBe(1)
+    expect(mockFindOne.mock.calls.length).toBe(1)
+    expect(response).toEqual('User creation failed')
   })
 
 })
